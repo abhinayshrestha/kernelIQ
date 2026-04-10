@@ -1,0 +1,38 @@
+# Database — never commit this, contains your system data
+*.db
+*.db-wal
+*.db-shm
+training_data.jsonl.bak
+kerneliq.db
+.venv
+venv
+
+*.egg-info/
+
+# Dataset — training data stays local
+dataset/training_data.jsonl
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment
+.env
+*.env
+config.local.py
+kerneliq.toml
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cursor
+.cursor/
+CLAUDE.md
+.cursorrules

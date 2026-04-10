@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kerneliq"
+version = "0.1.0"
+description = "Local Linux diagnosis agent: telemetry daemon and LLM-driven REPL"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = [
+    "psutil>=5.9.0",
+    "prompt_toolkit>=3.0",
+    "pyperclip",
+]
+
+[project.scripts]
+kerneliq = "shell.repl:start_repl"
+kerneliq-daemon = "daemon.loop:start_daemon"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["daemon*", "db*", "dataset*", "executor*", "model*", "shell*"]
+
+[tool.setuptools]
+py-modules = ["config", "main"]

@@ -1,0 +1,46 @@
+# KernelIQ configuration — copy this file to kerneliq.toml and edit it.
+# kerneliq.toml is gitignored; your API keys stay local.
+# After any change: systemctl --user restart kerneliq-daemon  (and restart the REPL).
+
+[kerneliq]
+DAEMON_COLLECTION_INTERVAL_SEC = 15
+
+# ── Ollama (local) ────────────────────────────────────────────────────────────
+OLLAMA_BASE_URL = "http://localhost:11434"
+OLLAMA_CHAT_TIMEOUT_SEC = 120
+LOCAL_LLM_MODEL = "llama3.2:3b"
+
+# ── Model backend ─────────────────────────────────────────────────────────────
+# ollama | deepseek | openai | claude | google
+MODEL_BACKEND = "ollama"
+
+# ── Cloud API keys and models ─────────────────────────────────────────────────
+# Set the pair for whichever backend you use above.
+# Leave MODEL empty to use the backend's default model.
+DEEPSEEK_API_KEY = ""
+DEEPSEEK_MODEL = ""           # default: deepseek-chat
+
+OPENAI_API_KEY = ""
+OPENAI_MODEL = ""             # default: gpt-4o
+
+ANTHROPIC_API_KEY = ""
+ANTHROPIC_MODEL = ""          # default: claude-sonnet-4-5
+
+GOOGLE_API_KEY = ""
+GOOGLE_MODEL = ""             # default: gemini-2.0-flash
+
+# ── Alert thresholds ──────────────────────────────────────────────────────────
+ALERT_DISK_WARNING_PERCENT = 80.0
+ALERT_DISK_CRITICAL_PERCENT = 95.0
+ALERT_MEMORY_FREE_WARNING_PERCENT = 10.0
+ALERT_MEMORY_FREE_CRITICAL_PERCENT = 5.0
+ALERT_SWAP_USED_WARNING_PERCENT = 80.0
+ALERT_CPU_SUSTAINED_THRESHOLD_PERCENT = 80.0
+ALERT_CPU_SUSTAINED_SAMPLE_COUNT = 3
+ALERT_IOWAIT_THRESHOLD_PERCENT = 20.0
+ALERT_IOWAIT_SAMPLE_COUNT = 3
+ALERT_ZOMBIE_MIN_COUNT = 5
+ALERT_SERVICE_FLAP_WINDOW_MINUTES = 5
+ALERT_SERVICE_FLAP_MIN_STATE_CHANGES = 3
+ALERT_SERVICE_FLAP_STABILITY_MINUTES = 2
+ALERT_OOM_JOURNAL_SINCE = "2 minutes ago"

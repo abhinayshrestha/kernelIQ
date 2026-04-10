@@ -1,0 +1,28 @@
+# KernelIQ user systemd unit — install to ~/.config/systemd/user/ and run
+# `systemctl --user daemon-reload && systemctl --user enable --now kerneliq-daemon`.
+# Logs: journalctl --user -u kerneliq-daemon
+
+[Unit]
+# Human-readable name shown in systemctl status and journal metadata.
+Description=KernelIQ Background Telemetry Daemon
+# Start after basic networking is up (daemon may eventually use network for LLM).
+After=network.target
+
+[Service]
+# Long-running foreground process; systemd treats the main PID as the service.
+Type=simple
+# Run the collection loop as a module; WorkingDirectory must be the repo root
+# so `daemon` and `db` packages resolve on PYTHONPATH (cwd is added implicitly).
+ExecStart=/usr/bin/python3 -m daemon.loop
+# %h expands to the unit owner's home directory — no hardcoded username.
+WorkingDirectory=%h/kernelIQ
+# If the process exits non-zero, restart after a short pause (crash recovery).
+Restart=on-failure
+RestartSec=5
+# stdout/stderr go to the user journal (journalctl --user -u kerneliq-daemon).
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+# Pull this unit in when the user session reaches default.target (graphical or tty login).
+WantedBy=default.target

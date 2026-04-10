@@ -1,0 +1,18 @@
+# KernelIQ user systemd oneshot — install to ~/.config/systemd/user/ alongside
+# kerneliq-retention.timer. Invoked by the timer daily to prune old SQLite rows.
+# Logs: journalctl --user -u kerneliq-retention.service
+
+[Unit]
+# Shown in systemctl status; pairs with the timer unit for scheduled cleanup.
+Description=KernelIQ Database Retention Cleanup
+
+[Service]
+# Runs the retention script once and exits; systemd considers the job complete.
+Type=oneshot
+# Prune telemetry and related tables per db.retention policy; cwd must be repo root.
+ExecStart=/usr/bin/python3 -m db.retention
+# %h is the unit owner's home directory (same convention as kerneliq-daemon).
+WorkingDirectory=%h/kernelIQ
+# Send script output to the user journal for troubleshooting.
+StandardOutput=journal
+StandardError=journal
