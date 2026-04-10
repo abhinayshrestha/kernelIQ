@@ -379,6 +379,7 @@ MIT — see [LICENSE](LICENSE)
 ## Author
 
 **Abhinay Shrestha** · [GitHub](https://github.com/abhinayshrestha)
+**abhinay.shrestha11@gmail.com**
 
 ---
 
